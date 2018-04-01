@@ -18,3 +18,6 @@
   * Volume
   * Liveness and Readiness
   * Resource management and Horizontal Pods Autoscaler (HPA)
+
+## Resources
+* https://kubernetes.io
