@@ -1,0 +1,20 @@
+apiVersion: "v1"
+kind: Pod
+metadata:
+  name: maindb
+  labels:
+    name: "maindb"
+    version: "1.0"
+    module: "maindb"
+    environment: "development"
+spec:
+  containers:
+    - name: maindb
+      image: labdocker/mysql:latest
+      ports:
+        - containerPort: 3306
+          protocol: TCP
+      env:
+        -
+          name: "MYSQL_ROOT_PASSWORD"
+          value: "password"

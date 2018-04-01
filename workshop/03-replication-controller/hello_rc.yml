@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: hello
+  labels:
+    name: web
+    version: "1.0"
+    module: WebServer
+    environment: development
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: web
+        version: "1.0"
+        module: WebServer
+        environment: development
+    spec:
+      containers:
+        - name: hello
+          image: somkiat/hello:latest
+          ports:
+          - containerPort: 8080
+            protocol: TCP

@@ -1,0 +1,27 @@
+1. Create pods
+$kubectl create -f hello_pod.yml --validate=false
+$kubectl get pods
+
+2. Create service
+$kubectl create -f hello_service.yml --validate=false
+$kubectl get svc
+
+3. Testing service
+$minikube status
+$minikube ip
+$export SERVICE=<ip of minikube>:<port>
+$curl  http://$SERVICE
+
+4. Description of pods and service
+$kubectl describe pod hello-web
+$kubectl describe service hello
+
+5. Log of pods
+$kubectl logs hello-web -c hello-web
+
+6. Access to container in pods
+$kubectl exec -it hello-web -c hello-web sh
+
+7. Delete pods and service
+$kubectl delete -f hello_pod.yml
+$kubectl delete -f hello_service.yml

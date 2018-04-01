@@ -1,0 +1,11 @@
+1. Create Pods with Volume EmptyDir
+$kubectl create -f empty_pod.yml --validate=false
+$kubectl get pods -w
+
+2. Forward a port from your local machine to the Pods
+$kubectl port-forward tryempty 8080:80
+
+try localhost:8080
+
+3. Delete pods
+$kubectl delete -f empty_pod.yml

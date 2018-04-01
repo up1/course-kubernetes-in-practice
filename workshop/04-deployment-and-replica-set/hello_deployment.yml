@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+  labels:
+    app: web
+spec:
+  replicas: 3
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: hello
+          image: somkiat/hello:v3
+          ports:
+          - containerPort: 8080
+            protocol: TCP

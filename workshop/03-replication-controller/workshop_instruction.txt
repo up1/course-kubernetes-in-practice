@@ -1,0 +1,29 @@
+1. Create Replication Controller
+$kubectl create -f hello_rc.yml --validate=false
+$kubectl get po,rc
+
+2. Create service
+$kubectl create -f hello_service.yml --validate=false
+$kubectl get svc
+
+3. Testing service
+$minikube status
+$minikube ip
+$export SERVICE=<ip of minikube>:32500
+$curl  http://$SERVICE
+
+4. Delete some pods
+$kubectl get pods
+$kubectl delete pods hello-????
+
+And check pods again !!
+
+5. Scale Replication Controller
+$kubectl scale --replicas=5 rc/hello
+$kubectl scale --replicas=1 -f hello_rc.yml
+
+$kubectl describe rc hello
+
+6. Delete pods and service
+$kubectl delete -f hello_rc.yml
+$kubectl delete -f hello_service.yml

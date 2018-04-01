@@ -1,0 +1,41 @@
+1. Create database pods
+$kubectl create -f database_pod.yml --validate=false
+$kubectl get pods
+$kubectl get pods -w
+
+2. Create database service
+$kubectl create -f database_service.yml --validate=false
+$kubectl get svc
+
+3. Create web pods
+$kubectl create -f web_pod.yml --validate=false
+$kubectl get pods
+$kubectl get pods -w
+
+4. Create web service
+$kubectl create -f web_service.yml --validate=false
+$kubectl get svc
+
+5. Testing service
+$minikube status
+$minikube ip
+$export PORT=32500
+$export SERVICE=$(minikube ip):$PORT
+
+$curl  http://$SERVICE
+$curl  http://$SERVICE/init
+$curl -i -H "Content-Type: application/json" -X POST -d '{"uid": "1", "user":"User01", "descripe":"Slave"}' http://$SERVICE/users/insertuser
+
+$curl http://$SERVICE/users/1
+User01(Database Direct)
+
+$curl http://$SERVICE/users/1
+User01(Database Cache)
+
+
+6. Delete pods and service
+$kubectl delete -f web_pod.yml
+$kubectl delete -f web_service.yml
+
+$kubectl delete -f database_pod.yml
+$kubectl delete -f database_service.yml

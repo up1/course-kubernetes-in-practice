@@ -1,0 +1,17 @@
+apiVersion: "v1"
+kind: Pod
+metadata:
+  name: hello-web
+  labels:
+    name: web
+    owner: somkiat
+    version: "1.0"
+    module: WebServer
+    environment: development
+spec:
+  containers:
+    - name: hello-web
+      image: somkiat/hello
+      ports:
+        - containerPort: 8080
+          protocol: TCP

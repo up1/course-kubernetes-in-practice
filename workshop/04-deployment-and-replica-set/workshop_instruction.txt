@@ -1,0 +1,49 @@
+1. Create Deployment ans ReplicaSet
+$kubectl create -f hello_deployment.yml --validate=false
+$kubectl get deployment,rs
+$kubectl describe deployments
+$kubectl describe deployments hello
+
+2. Create service
+$kubectl create -f hello_service.yml --validate=false
+$kubectl get svc
+
+3. Testing service
+$minikube status
+$minikube ip
+$export SERVICE=<ip of minikube>:32500
+$curl  http://$SERVICE
+
+4. Update new version of Docker image on deployment
+$kubectl set image deployment/hello hello=somkiat/hello:v2
+
+5. Check status of Rollout from deployment
+$kubectl rollout status deployment/hello
+
+$kubectl get deployment,rs,pods
+
+6. Testing service again !!
+$minikube status
+$minikube ip
+$export SERVICE=<ip of minikube>:32500
+$curl  http://$SERVICE
+
+7. Check revision of change in History
+$kubectl rollout history deployment/hello
+
+8. Try to rollback to revision=1 of rollout history
+$kubectl rollout undo deployment/hello --to-revision=1
+
+9. Testing service again !!
+$minikube status
+$minikube ip
+$export SERVICE=<ip of minikube>:32500
+$curl  http://$SERVICE
+
+10. Scale a deployment
+$kubectl scale deployment hello --replicas=5
+$kubectl get deployment,rs
+
+11. Delete pods and service
+$kubectl delete -f hello_deployment.yml
+$kubectl delete -f hello_service.yml

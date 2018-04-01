@@ -1,0 +1,42 @@
+1. Create a container
+$kubectl run hello --image=somkiat/hello --port=8080 --generator=run/v1
+
+2.1 List of pods
+$kubectl get pods
+$kubectl get pods -o wide
+
+2.2 List of ReplicationController
+$kubectl get replicationcontrollers
+$kubectl get rc
+
+3. Expose the ReplicationController with service
+$kubectl expose rc hello --type=LoadBalancer --name hello-http
+
+4. List of services
+$kubectl get services
+$kubectl get svc
+
+5. Access service with Access (Minikube not support LoadBalancer)
+$minikube service hello-http
+
+6. Scale up of Pods on the ReplicationController
+$kubectl scale rc hello --replicas=3
+
+7. List of ReplicationController and Pods
+$kubectl get rc
+$kubectl get pods
+
+8. Testing
+$export SERVICE=192.168.99.100:32614
+$curl  http://$SERVICE
+Hello, "/" on hello-wwsnh
+
+$curl  http://$SERVICE                                                                            MacBook-Pro-2% curl  http://192.168.99.100:32614/
+Hello, "/" on hello-pqnzp
+
+$curl  http://$SERVICE                                                                             MacBook-Pro-2% curl  http://192.168.99.100:32614/
+Hello, "/" on hello-lw2p7
+
+9. Goto dashboard
+$kubectl cluster-info
+$minikube dashboard
