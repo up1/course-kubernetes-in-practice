@@ -1,0 +1,57 @@
+1. Create a container
+Create with Deployment/ReplicaSet
+$kubectl run hello --image=somkiat/hello:latest --port=8080
+
+2.1 List of pods
+$kubectl get pods
+$kubectl get pods -o wide
+$kubectl describe pods
+
+2.2 List of Deployment and ReplicaSet
+$kubectl get deployments
+$kubectl get replicaset
+$kubectl get rs
+$kubectl describe deployments
+
+2.3 View cluster events
+$kubectl get events
+$kubectl config view
+
+3. Expose the Deployment with service
+$kubectl expose deployment hello --type=LoadBalancer --name hello-http
+
+4. List of services
+$kubectl get services
+$kubectl get svc
+
+5. Access service with Access (Minikube not support LoadBalancer)
+$minikube service hello-http
+
+6. Scale up of Pods on the Deployment
+$kubectl scale deployment hello --replicas=3
+
+7. List of Deployment and Pods
+$kubectl get deployment
+$kubectl get rs
+$kubectl get pods
+
+8. Testing
+$export SERVICE=192.168.99.100:32614
+$curl  http://$SERVICE
+Hello, "/" on hello-wwsnh
+
+$curl  http://$SERVICE                                                                            MacBook-Pro-2% curl  http://192.168.99.100:32614/
+Hello, "/" on hello-pqnzp
+
+$curl  http://$SERVICE                                                                             MacBook-Pro-2% curl  http://192.168.99.100:32614/
+Hello, "/" on hello-lw2p7
+
+9. Goto kubernetes dashboard
+$minikube dashboard
+$kubectl cluster-info
+
+10. Delete all resources
+$kubectl delete deployments <name>
+$kubectl delete replicaset <name>
+$kubectl delete pod <name>
+$kubectl delete service <name>
