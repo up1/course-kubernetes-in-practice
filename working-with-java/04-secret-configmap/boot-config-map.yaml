@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: boot-configmap
+  namespace: myservice
+  labels:
+    name: boot-configmap
+data:
+  MONGO_URI: mongo-service

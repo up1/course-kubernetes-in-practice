@@ -1,0 +1,18 @@
+1. Create namespace
+$kubectl create namespace myservice
+$kubectl get namespace
+
+2. Create configmap
+$kubectl create -f boot-config-map.yaml
+$kubectl get configmap --namespace myservice
+$kubectl describe configmap/boot-configmap --namespace myservice
+
+3. Use configmap from deployment
+$kubectl create -f boot-deployment.yaml --namespace myservice
+$kubectl create -f boot-service.yaml --namespace myservice
+
+
+4. Create secret
+$kubectl create -f boot-secret.yaml
+$kubectl get secret --namespace myservice
+$kubectl describe secret/boot-secret --namespace myservice
