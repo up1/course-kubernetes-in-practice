@@ -1,0 +1,48 @@
+1. Build JAR file in Gradle project with Spring Boot
+$./gradlew bootRepackage
+
+2. Build Docker image of Spring boot project
+$./gradlew buildDocker
+$docker image ls
+
+3. Push Docker image to Docker Hub
+$docker login
+$docker push somkiat/spring-boot-example
+
+Try to check result in
+https://hub.docker.com/r/somkiat/spring-boot-example/
+
+4. Deploy application on Kubernetes
+
+4.0 Prepare
+$minikube ssh
+>docker pull somkiat/spring-boot-example
+>docker pull mongo
+
+4.1 Deploy mongodb
+$cd k8s/mongodb/
+$kubectl create -f mongo-controller.yaml
+$kubectl create -f mongo-service.yaml
+
+# See result
+$kubectl get pod,rc,service
+
+4.2 Deploy Spring boot application
+$cd k8s/
+$kubectl create -f boot-deployment.yaml
+$kubectl create -f boot-service.yaml
+
+# See result
+$kubectl get pod,deployment,rs,service
+
+4.3 Testing Spring boot service
+Open URL http://192.168.99.100:30265/greeting  or
+$curl http://192.168.99.100:30265/greeting
+
+4.4 Testing service with MongoDB
+# Insert data
+$curl -X POST -H "Content-Type: application/json" -d '{"firstName":"Somkiat","lastName":"Puisungnoen","email":"xxx@gmail.com"}' http://192.168.99.100:30265/user
+
+# Get all data in browser
+Open URL http://192.168.99.100:30265/user  or
+$curl http://192.168.99.100:30265/user

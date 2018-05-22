@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spring-boot-service-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: spring-boot-service
+    spec:
+      containers:
+      - name: spring-boot-service
+        image: somkiat/spring-boot-example
+        ports:
+        - containerPort: 8080
+        env:
+            - name: MONGO_URI
+              value: mongo-service
+        resources:
+            requests:
+              cpu: "200m"

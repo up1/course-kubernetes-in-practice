@@ -1,0 +1,43 @@
+1. Enable heapster in minikube
+$minikube addons enable heapster
+$minikube addons start heapster
+$minikube addons open heapster
+$minikube addons list
+
+2. Create metric server
+$git clone https://github.com/kubernetes-incubator/metrics-server.git
+$cd metrics-server/
+$kubectl create -f deploy/1.8+/
+$kubectl get pods --all-namespaces
+
+3. Create service and deployment of Spring boot service
+$kubectl create -f boot-deployment.yaml
+$kubectl create -f boot-service.yaml
+
+4. Create Horizontal Pods Autoscale (HPA)
+$kubectl autoscale deployment/spring-boot-service-deployment --min=1 --max=5 --cpu-percent=5
+$kubectl get hpa
+
+
+5. Load testing
+Try to create deployment=load-test to run load testing
+$kubectl run -i --tty load-test --image=busybox /bin/sh
+>wget -q -O- http://spring-boot-service.default.svc.cluster.local:8080/user
+>while true; sleep 0.1; do wget -q -O- http://spring-boot-service.default.svc.cluster.local:8080/user; done
+
+6. Monitoring system
+$kubectl top nodes
+$kubectl top pods
+$kubectl get hpa
+$kubectl describe hpa
+
+And open kubernetes dashboard
+http://192.168.99.100:30000
+
+And open Grafana
+http://192.168.99.100:30002/dashboard/db/cluster?orgId=1
+
+7. Delete all resources
+$kubectl delete hp
+$kubectl delete deployment
+$kubectl delete -f deploy/1.8+/
