@@ -5,11 +5,15 @@ $kubectl describe node
 $kubectl get cs
 $kubectl get pods
 
-#SSH to minikube
+# SSH to minikube to pull images
 $minikube ip
 $minikube ssh
 >docker pull jboss/wildfly:12.0.0.Final
 >docker pull somkiat/hello:latest
+>docker pull labdocker/mysql:latest
+>docker pull labdocker/redis:latest
+>docker pull labdocker/cluster:webservice
+>docker pull labdocker/cluster:webcache_kubernetes
 
 1. Create a container
 # Create with Replication controller
