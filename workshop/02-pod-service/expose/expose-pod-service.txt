@@ -1,0 +1,21 @@
+# Host network = true
+$kubectl create -f 01-host-network.yml
+$curl -v 192.168.99.100
+$kubectl delete -f 01-host-network.yml
+
+# Host port
+$kubectl create -f 02-host-port.yml
+$curl -v 192.168.99.100:8081
+$kubectl delete -f 02-host-port.yml
+
+# NodePort
+$kubectl create -f 03-nginx-pod.yaml
+$kubectl create -f 03-node-port.yaml
+$curl -v 192.168.99.100:30001
+$kubectl delete -f 03-nginx-pod.yaml
+$kubectl delete -f 03-node-port.yaml
+
+# Load Balance
+$kubectl create -f 04-load-balance.yaml
+$kubectl create -f 03-nginx-pod.yaml
+$kubectl get svc nginx
