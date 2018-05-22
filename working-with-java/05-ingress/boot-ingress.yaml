@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingresswebtest
+spec:
+  rules:
+  - host: first.cdg.com
+    http:
+      paths:
+      - backend:
+          serviceName: spring-boot-service
+          servicePort: 80
+  - host: second.cdg.com
+    http:
+      paths:
+      - backend:
+          serviceName: spring-boot-service
+          servicePort: 80

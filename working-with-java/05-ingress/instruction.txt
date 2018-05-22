@@ -1,0 +1,23 @@
+1. Enable ingress in minikube
+$minikube addons list
+$minikube addons enable ingress
+
+2. Create service and deployment of Spring boot service
+$kubectl create -f boot-deployment.yaml
+$kubectl create -f boot-service.yaml
+
+3. Create Ingress
+$kubectl create -f boot-ingress.yaml
+$kubectl get ing -o wide
+$kubectl describe ing
+
+4. Testing
+#Add host in Mac
+$echo "$(minikube ip) first.cdg.com second.cdg.com" | sudo tee -a /private/etc/hosts
+
+#Add host for Windows
+File c:\windows\system32\driver\etc\host
+<minikube ip>  first.cdg.com second.cdg.com
+
+$curl http://first.cdg.com3/greeting
+$curl http://second.cdg.com3/greeting
