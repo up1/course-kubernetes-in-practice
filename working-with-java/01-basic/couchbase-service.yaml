@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: couchbase-service
+spec:
+  selector:
+    app: couchbase-rc-pod
+  ports:
+    - name: admin
+      port: 8091
+    - name: query
+      port: 8093
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: couchbase-rc
+spec:
+  replicas: 2
+  selector:
+    app: couchbase-rc-pod
+  template:
+    metadata:
+      labels:
+        app: couchbase-rc-pod
+    spec:
+      containers:
+      - name: couchbase
+        image: couchbase
+        ports:
+        - containerPort: 8091
