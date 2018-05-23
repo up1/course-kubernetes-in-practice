@@ -4,6 +4,10 @@ $minikube addons start heapster
 $minikube addons open heapster
 $minikube addons list
 
+# Check pods of heapster
+$kubectl get pods --all-namespaces
+$kubectl get service --all-namespaces
+
 2. Create metric server
 $git clone https://github.com/kubernetes-incubator/metrics-server.git
 $cd metrics-server/
