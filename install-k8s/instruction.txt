@@ -37,6 +37,7 @@ sudo iptables-restore < /tmp/iptables.conf
 sudo su -
 swapoff -a
 kubeadm init --kubernetes-version=v1.10.0 --pod-network-cidr=10.244.0.0/16     #--apiserver-cert-extra-sans 35.198.225.50
+kubeadm init --kubernetes-version=v1.10.3 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.244.0.0/12 --ignore-preflight-errors=cri
 exit
 
 
@@ -44,14 +45,9 @@ exit
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+## Enable master to deploy pods
 kubectl taint nodes --all node-role.kubernetes.io/master-
-
-
-kubectl taint nodes ubuntu-s-4vcpu-8gb-sgp1-01 master=DoNotSchedulePods:NoExecute
-kubectl scale deployment/nginx --replicas=5
-
-
-
 
 ## Cluster network
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
@@ -76,6 +72,8 @@ http://localhost:8001/api/v1
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 http://localhost:8001/api/v1/namespaces/kube-system/services/monitoring-grafana:/proxy/
 
+## Disable master to deploy pods
+kubectl taint nodes ubuntu-s-4vcpu-8gb-sgp1-01 master=DoNotSchedulePods:NoExecute
 
 ## Worker
 sudo su -
@@ -86,6 +84,7 @@ exit
 ## Deploy
 kubectl run nginx --image=nginx --port 80
 kubectl expose deploy nginx --port 80 --target-port 80 --type NodePort
+kubectl scale deployment/nginx --replicas=5
 
 kubectl get services
 kubectl delete service nginx
