@@ -68,6 +68,7 @@ kubectl get pods --all-namespaces
 
 
 ## On Local :: Proxying API Server to localhost
+scp root@<master ip>:/etc/kubernetes/admin.conf .
 scp root@167.99.79.135:/etc/kubernetes/admin.conf .
 kubectl --kubeconfig ./admin.conf proxy
 
