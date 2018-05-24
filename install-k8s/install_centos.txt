@@ -1,0 +1,124 @@
+## Install Docker CE
+https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce-1
+
+## Change CGROUP
+docker info | grep cgroup
+vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=cgroupfs"
+
+
+### Install Kubeadm/Kubelet
+1. Install Yum Repository
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+
+2. Disable SELinux
+setenforce 0
+
+3. Install from Yum
+
+yum install -y kubelet kubeadm kubectl kubernetes-cni
+
+
+4. Enable docker and kubelet
+systemctl enable docker && systemctl start docker
+systemctl enable kubelet && systemctl start kubelet
+
+5. Overlay
+lsmod | grep overlay
+overlay
+
+6. Restart
+systemctl start docker
+systemctl start kubelet
+
+7. Disable firewall
+systemctl stop firewalld
+
+==== Installation Master and Workers ====
+#MASTER
+sudo su -
+swapoff -a
+kubeadm init --kubernetes-version=v1.10.3 --pod-network-cidr=10.244.0.0/16     --apiserver-cert-extra-sans 157.179.16.71
+kubeadm init --kubernetes-version=v1.10.3 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.244.0.0/12 --ignore-preflight-errors=cri
+exit
+
+
+## MASTER
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+## Enable master to deploy pods
+kubectl taint nodes --all node-role.kubernetes.io/master-
+
+## Cluster network
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.8.0/Documentation/kube-flannel-rbac.yml
+
+## Tools in MASTER
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+kubectl apply -f https://github.com/kubernetes/heapster/raw/master/deploy/kube-config/rbac/heapster-rbac.yaml
+kubectl apply -f https://github.com/kubernetes/heapster/raw/master/deploy/kube-config/influxdb/heapster.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/influxdb.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/grafana.yaml
+kubectl create clusterrolebinding insecure-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+kubectl get pods --all-namespaces
+
+
+## On Local :: Proxying API Server to localhost
+scp root@<master ip>:/etc/kubernetes/admin.conf .
+scp root@167.99.79.135:/etc/kubernetes/admin.conf .
+kubectl --kubeconfig ./admin.conf proxy
+
+http://localhost:8001/api/v1
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://localhost:8001/api/v1/namespaces/kube-system/services/monitoring-grafana:/proxy/
+
+## Disable master to deploy pods
+kubectl taint nodes <master node> master=DoNotSchedulePods:NoExecute
+kubectl taint nodes docker01 master=DoNotSchedulePods:Execute
+
+## Worker
+sudo su -
+swapoff -a
+kubeadm join 10.148.0.3:6443 --token b963d6.7zr3omm5kvu80ege --discovery-token-ca-cert-hash sha256:4a009b347760ce963225b32c7d2f27253b3e6740c7a0102a93afb5abf1a43f24
+exit
+
+## Deploy
+kubectl run nginx --image=nginx --port 80
+kubectl expose deploy nginx --port 80 --target-port 80 --type NodePort
+kubectl scale deployment/nginx --replicas=5
+
+kubectl get services
+kubectl delete service nginx
+kubectl get deployments
+kubectl delete deployment nginx
+
+curl http://10.148.0.3:32765
+curl http://10.148.0.2:32765
+curl http://10.148.0.2:32765
+
+
+
+kubectl delete node node-02
+kubectl delete node node-03
+kubectl drain node-01 --delete-local-data --force --ignore-daemonsets
+kubectl delete node node-01
+
+
+#Remove kubernetes
+kubeadm reset
+sudo apt-get purge kubeadm kubectl kubelet kubernetes-cni kube*
+sudo apt-get autoremove
+sudo rm -rf ~/.kube
