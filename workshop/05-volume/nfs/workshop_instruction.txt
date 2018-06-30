@@ -49,7 +49,15 @@ $touch /nfs/general/from_query.txt
 
 
 # 3. Working PersistentVolume(PV) and PersistentVolumeClaim(PVC)
+$kubectl create -f pv.yml
+$kubectl create -f pvc.yml
 
+$kubectl get pv
+$kubectl describe pv/pv-nfs
+$kubectl get pvc
+$kubectl describe pvc/pvc-nfs
+
+# 4. Deploy application
 
 
 
