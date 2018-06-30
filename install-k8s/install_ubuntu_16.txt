@@ -1,0 +1,47 @@
+# Install K8s Server
+cd /usr/lib/python3/dist-packages
+cp apt_pkg.cpython-35m-x86_64-linux-gnu.so apt_pkg.so
+
+
+# Install docker
+sudo apt update && apt upgrade -y
+sudo apt install linux-image-extra-virtual ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+stable"
+sudo apt update
+sudo apt install docker-ce -y
+
+
+# Install k8s server
+sudo apt update
+sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+sudo su
+cat <<EOF > /etc/apt/sources.list.d/kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+apt-get update
+exit
+
+sudo apt-get install -y kubelet kubeadm kubernetes-cni
+
+# Start master
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.148.0.2 --kubernetes-version stable-1.11 --ignore-preflight-errors all
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# Networking
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
+kubectl get all --namespace=kube-system
+
+# Join cluster
+sudo kubeadm join 10.148.0.2:6443 --token 2fl6ag.sykh346hkws85rv2 --discovery-token-ca-cert-hash sha256:a0a240ed4486ca12eae3d0e206e0c87f68abe0a079c1d7b0255edcb2b74f5026 --ignore-preflight-errors=all
+
+
+
+Reference
+https://medium.com/@Grigorkh/install-kubernetes-on-ubuntu-1ac2ef522a36
