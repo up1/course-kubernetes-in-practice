@@ -61,12 +61,31 @@ $kubectl describe pvc/pvc-nfs
 $kubectl create -f nginx_deployment.yml
 $kubectl create -f nginx_service.yml
 
+$kubectl get deployment
+$kubectl get svc
+$kubectl get pods
 
+# Create file /nfs/general/hello.html
+$vi /nfs/general/hello.html
+<h1>Hello World</h1>
 
+# 5. Access to Pods to see files
+$kubectl exec -it <pods name> sh
 
+> ls
+bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var
+> cd /usr/share/nginx/html
+> ls
+from_master.txt  from_query.txt  hello.html
 
+# 6. Delete all resources
+$kubectl delete -f nginx_deployment.yml
+$kubectl delete -f nginx_service.yml
+$kubectl delete -f pv.yml
+$kubectl delete -f pvc.yml
 
 
 Resources
+https://hub.docker.com/_/nginx/
 https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-16-04
 https://github.com/janakiramm/wp-statefulset
