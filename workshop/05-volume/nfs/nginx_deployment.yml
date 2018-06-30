@@ -3,11 +3,14 @@ kind: Deployment
 metadata:
   name: nginx-deployment
 spec:
+  selector:
+    matchLabels:
+      app: nginx
   replicas: 2
   template:
     metadata:
       labels:
-        name: nginx
+        app: nginx
     spec:
       containers:
       - name: nginx
@@ -16,7 +19,7 @@ spec:
         - containerPort: 80
         volumeMounts:
             - name: try-nfs
-              mountPath: "/usr/share/nginx/html"
+              mountPath: "/usr/src/app"
       volumes:
       - name: try-nfs
         persistentVolumeClaim:

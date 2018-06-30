@@ -58,7 +58,8 @@ $kubectl get pvc
 $kubectl describe pvc/pvc-nfs
 
 # 4. Deploy application
-
+$kubectl create -f nginx_deployment.yml
+$kubectl create -f nginx_service.yml
 
 
 
