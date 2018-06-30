@@ -1,0 +1,63 @@
+# 1. Create Cluster
+$kubectl get node -o wide
+NAME      STATUS    ROLES     AGE       VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
+master    Ready     master    22m       v1.11.0   10.148.0.2    <none>        Ubuntu 16.04.4 LTS   4.13.0-1019-gcp   docker://18.3.1
+query     Ready     <none>    3m        v1.11.0   10.148.0.4    <none>        Ubuntu 16.04.4 LTS   4.13.0-1019-gcp   docker://18.3.1
+
+# 2. Create NFS Server and clients
+$sudo apt-get update
+$sudo apt-get install nfs-kernel-server
+$sudo mkdir /var/nfs/general -p
+$sudo chmod 777 /var/nfs/general
+$sudo chown nobody:nogroup /var/nfs/general
+
+# Configuring the NFS Exports on the Host Server
+$sudo vi /etc/exports
+/var/nfs/general 10.148.0.0/24(rw,sync,no_root_squash,no_all_squash)
+
+# Restart NFS server
+$sudo exportfs -a
+$sudo systemctl restart nfs-kernel-server
+
+# Enable firewall
+$sudo ufw enable
+$sudo ufw status
+$sudo ufw allow from 10.148.0.4 to any port nfs
+
+# Mounting the directory on client
+$sudo apt-get update
+$sudo apt-get install nfs-common
+$sudo mkdir -p /nfs/general
+$sudo mount -t nfs 10.148.0.2::/var/nfs/general /nfs/general
+$df -kh
+
+Filesystem                   Size  Used Avail Use% Mounted on
+udev                         1.8G     0  1.8G   0% /dev
+tmpfs                        370M  5.4M  364M   2% /run
+/dev/sda1                    9.7G  3.0G  6.7G  31% /
+tmpfs                        1.9G     0  1.9G   0% /dev/shm
+tmpfs                        5.0M     0  5.0M   0% /run/lock
+tmpfs                        1.9G     0  1.9G   0% /sys/fs/cgroup
+tmpfs                        370M     0  370M   0% /run/user/1001
+10.148.0.2:/var/nfs/general  9.7G  4.4G  5.3G  46% /nfs/general
+
+# Testing from master
+$touch /var/nfs/general/from_master.txt
+
+# Testing from worker
+$touch /nfs/general/from_query.txt
+
+
+# 3. Working PersistentVolume(PV) and PersistentVolumeClaim(PVC)
+
+
+
+
+
+
+
+
+
+Resources
+https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-16-04
+https://github.com/janakiramm/wp-statefulset
