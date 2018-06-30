@@ -25,14 +25,3 @@ spec:
         - name: mongo-persistent-storage
           hostPath:
                 path: /data/storage/mongodb
-      env:
-        - name: MONGO_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: username
-        - name: MONGO_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: password

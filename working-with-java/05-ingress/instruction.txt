@@ -19,5 +19,5 @@ $echo "$(minikube ip) first.cdg.com second.cdg.com" | sudo tee -a /private/etc/h
 File c:\windows\system32\driver\etc\host
 <minikube ip>  first.cdg.com second.cdg.com
 
-$curl http://first.cdg.com3/greeting
-$curl http://second.cdg.com3/greeting
+$curl http://first.cdg.com/greeting
+$curl http://second.cdg.com/greeting

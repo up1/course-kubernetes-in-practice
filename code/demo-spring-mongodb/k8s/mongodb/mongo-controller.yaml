@@ -25,3 +25,6 @@ spec:
         - name: mongo-persistent-storage
           hostPath:
                 path: /data/storage/mongodb
+
+
+                

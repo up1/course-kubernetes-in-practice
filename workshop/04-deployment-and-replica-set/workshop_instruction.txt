@@ -15,7 +15,7 @@ $export SERVICE=<ip of minikube>:32500
 $curl  http://$SERVICE
 
 4. Update new version of Docker image on deployment
-$kubectl set image deployment/hello hello=somkiat/hello:v2
+$kubectl set image deployment/hello hello=somkiat/hello:v3
 
 5. Check status of Rollout from deployment
 $kubectl rollout status deployment/hello
