@@ -19,7 +19,7 @@ spec:
         - containerPort: 80
         volumeMounts:
             - name: try-nfs
-              mountPath: "/usr/src/app"
+              mountPath: "/usr/share/nginx/html"
       volumes:
       - name: try-nfs
         persistentVolumeClaim:
