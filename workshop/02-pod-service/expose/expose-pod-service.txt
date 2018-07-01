@@ -16,6 +16,13 @@ $kubectl delete -f 03-nginx-pod.yaml
 $kubectl delete -f 03-node-port.yaml
 
 # Load Balance
-$kubectl create -f 04-load-balance.yaml
 $kubectl create -f 03-nginx-pod.yaml
+$kubectl create -f 04-load-balance.yaml
 $kubectl get svc nginx
+$kubectl delete -f 04-load-balance.yaml
+$kubectl delete -f 03-nginx-pod.yaml
+
+# Ingress
+$kubectl create -f 03-nginx-pod.yaml
+$kubectl create -f 05-ingress.yaml
+curl nginx.kube.example.com

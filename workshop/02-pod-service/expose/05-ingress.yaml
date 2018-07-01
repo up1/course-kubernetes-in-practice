@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx
+spec:
+  rules:
+    - host: nginx.kube.example.com
+      http:
+        paths:
+          - web:
+              serviceName: nginx
+              servicePort: 80
