@@ -1,0 +1,20 @@
+#### EmptyDir Volume ####
+1. Create Pods with Volume EmptyDir (memory)
+$kubectl create -f empty_pod.yml
+$kubectl get pods -w
+
+2. Forward a port from local machine to the Pods (Don't use in production)
+$kubectl port-forward tryempty 8080:80
+
+try localhost:8080
+
+3. Delete pods
+$kubectl delete -f empty_pod.yml
+
+#### HostPath Volume ####
+1. Create Pods with hostpath
+$kubectl create -f mongodb_hostpath_pod.yml
+$kubectl get pods -w
+
+2. See your data file in /tmp/mongodb
+ls /tmp/mongodb

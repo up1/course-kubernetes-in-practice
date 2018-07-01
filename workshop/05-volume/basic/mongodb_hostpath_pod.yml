@@ -3,10 +3,6 @@ kind: Pod
 metadata:
   name: mongodb
 spec:
-  volumes:
-    - name: mongodb-data
-      hostPath:
-        path: /tmp/mongodb
   containers:
     - image: mongo
       name: mongodb
@@ -16,3 +12,7 @@ spec:
       ports:
         - containerPort: 27017
           protocol: TCP
+  volumes:
+    - name: mongodb-data
+      hostPath:
+        path: /tmp/mongodb
