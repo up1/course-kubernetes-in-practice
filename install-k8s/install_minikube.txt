@@ -1,0 +1,20 @@
+0. Install VirtualBox
+https://www.virtualbox.org/wiki/Downloads
+
+1. Install minikube
+https://github.com/kubernetes/minikube/releases
+
+$minikube get-k8s-versions
+$minikube start
+$minikube start --kubernetes-version="v1.9.4"
+$minikube status
+$minikube ip
+$minikube dashboard
+$minikube dashboard --url=true
+
+2. Install Kubernetes CLI (kubectl)
+https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl
+
+$kubectl cluster-info
+$kubectl version
+$kubectl get nodes
