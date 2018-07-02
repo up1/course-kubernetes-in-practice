@@ -1,3 +1,11 @@
+https://github.com/up1/course-kubernetes-in-practice
+
+set http_proxy=pxc.set:80
+set https_proxy=pxc.set:80
+minukube start
+
+
+
 # Using Play with K8S
 # https://labs.play-with-k8s.com/
 
