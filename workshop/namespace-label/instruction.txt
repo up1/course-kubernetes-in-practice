@@ -1,0 +1,11 @@
+# Get all namespce
+$kubectl get namespce
+$kubectl get ns
+
+# Create resource with namespace
+$kubectl --namespace=dev run nginx --image=nginx
+$kubectl --namespace=dev get pods
+
+
+# Resources
+https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
