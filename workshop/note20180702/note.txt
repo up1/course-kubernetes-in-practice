@@ -1,0 +1,43 @@
+# Using Play with K8S
+# https://labs.play-with-k8s.com/
+
+1. Initializes cluster master node:
+
+kubeadm init --apiserver-advertise-address $(hostname -i)
+
+To start using your cluster, you need to run (as a regular user)
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+2. Initialize cluster networking:
+
+kubectl apply -n kube-system -f \
+   "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 |tr -d '\n')"
+
+3. kubectl get node
+NAME      STATUS    ROLES     AGE       VERSION
+node1     Ready     master    6m        v1.10.2
+
+4. Worker node join master
+kubeadm join --token 57b17b.ab262ec06e10e59d 192.168.0.8:6443 --discovery-token-ca-cert-hash sha256:4a5a0f0a573dc501f24c8a63c638c10343e47bcc57c423fc484e4334d2e4a043
+
+5. Using kubectl
+kubectl get all --namespace=kube-system
+docker container ps
+
+6. try with 01-hello/workshop_instruction.txt
+Concept iof Pods, Replication Controller and Service
+
+
+7. Get DNS name of pods
+$kubectl get pod -o wide
+$kubectl exec hello-flhbv cat /etc/resolv.conf
+https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
+https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#services
+
+8. Cluster information
+$kubectl cluster-info
+$kubectl config view
+https://kubernetes.io/docs/tasks/administer-cluster/access-cluster-services/
