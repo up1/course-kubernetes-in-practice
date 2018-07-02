@@ -11,6 +11,7 @@ $kubectl get rc
 
 3. Expose the ReplicationController with service
 $kubectl expose rc hello --type=LoadBalancer --name hello-http
+$kubectl expose rc hello --type=NodePort --name hello-http
 
 4. List of services
 $kubectl get services
@@ -40,3 +41,8 @@ Hello, "/" on hello-lw2p7
 9. Goto dashboard
 $kubectl cluster-info
 $minikube dashboard
+
+
+10. Delete resources
+$kubectl delete service/hello-http
+$kubectl delete rc/hello

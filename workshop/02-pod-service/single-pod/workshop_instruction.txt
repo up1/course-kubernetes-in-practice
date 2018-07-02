@@ -1,9 +1,10 @@
 1. Create pods
-$kubectl create -f hello_pod.yml --validate=false
+$kubectl create -f hello_pod.yml
+$kubectl create -f https://raw.githubusercontent.com/up1/course-kubernetes-in-practice/master/workshop/02-pod-service/single-pod/hello_pod.yml
 $kubectl get pods
 
 2. Create service
-$kubectl create -f hello_service.yml --validate=false
+$kubectl create -f hello_service.yml
 $kubectl get svc
 
 3. Testing service
