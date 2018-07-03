@@ -36,7 +36,7 @@ sudo iptables-restore < /tmp/iptables.conf
 #MASTER
 sudo su -
 swapoff -a
-kubeadm init --kubernetes-version=v1.10.3 --pod-network-cidr=10.244.0.0/16     #--apiserver-cert-extra-sans 35.198.225.50
+kubeadm init --kubernetes-version=v1.10.3 --pod-network-cidr=10.244.0.0/16     --apiserver-cert-extra-sans 157.179.16.71
 kubeadm init --kubernetes-version=v1.10.3 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.244.0.0/12 --ignore-preflight-errors=cri
 exit
 
@@ -74,7 +74,7 @@ http://localhost:8001/api/v1/namespaces/kube-system/services/monitoring-grafana:
 
 ## Disable master to deploy pods
 kubectl taint nodes <master node> master=DoNotSchedulePods:NoExecute
-kubectl taint nodes docker1 master=DoNotSchedulePods:NoExecute
+kubectl taint nodes docker01 master=DoNotSchedulePods:Execute
 
 ## Worker
 sudo su -

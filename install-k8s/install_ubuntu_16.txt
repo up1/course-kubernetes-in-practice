@@ -39,7 +39,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documen
 kubectl get all --namespace=kube-system
 
 # Join cluster
-sudo kubeadm join 10.148.0.2:6443 --token 2fl6ag.sykh346hkws85rv2 --discovery-token-ca-cert-hash sha256:a0a240ed4486ca12eae3d0e206e0c87f68abe0a079c1d7b0255edcb2b74f5026 --ignore-preflight-errors=all
+sudo kubeadm join 10.148.0.2:6443 --token kj1bm0.x5pdh970pmibb7tm --discovery-token-ca-cert-hash sha256:f2c3560e521795321b6130cf2f8bbb0390b054259d4fdec6ef470c8fa26f87b1 --ignore-preflight-errors=all
 
 
 

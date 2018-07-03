@@ -87,7 +87,7 @@ http://localhost:8001/api/v1/namespaces/kube-system/services/monitoring-grafana:
 
 ## Disable master to deploy pods
 kubectl taint nodes <master node> master=DoNotSchedulePods:NoExecute
-kubectl taint nodes docker01 master=DoNotSchedulePods:Execute
+kubectl taint nodes docker01 master=DoNotSchedulePods:NoExecute
 
 ## Worker
 sudo su -
