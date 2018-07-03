@@ -1,0 +1,33 @@
+### Write log of each Pods to stdout  ###
+1. Create basic of logging Pods (Write log to stdout)
+$kubectl create -f https://raw.githubusercontent.com/up1/course-kubernetes-in-practice/master/workshop/logging/basic_pod.yaml
+$kubectl get pods
+
+2. See log message of Pods with stream
+$kubectl logs -f po/counter
+$kubectl logs -f po/counter -c count
+
+# Logging with Papertrail (https://papertrailapp.com/)
+
+$kubectl create secret generic papertrail-destination --from-literal=papertrail-destination=syslog://logs4.papertrailapp.com:32397
+$kubectl create -f https://help.papertrailapp.com/assets/files/papertrail-logspout-daemonset.yml
+
+
+# Logging with EFK (Elasticsearch + Fluentd + Kibana)
+# https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch
+1. Create namespace
+$kubectl create namespace demologging
+$kubectl get ns
+
+2. Enable EFK add-on
+$minikube addons enable efk
+$kubectl get pods --all-namespaces
+kube-system   elasticsearch-logging-fx8w2                       1/1       Running   0          5m
+kube-system   fluentd-es-f986j                                  1/1       Running   0          5m
+kube-system   kibana-logging-7jvgw                              1/1       Running   0          5m
+
+See log from kibana
+$kubectl logs -f kibana-logging-7jvgw  --namespace=kube-system
+
+Access kibana
+$minikube service kibana-logging --namespace=kube-system
