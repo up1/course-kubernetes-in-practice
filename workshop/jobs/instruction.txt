@@ -1,0 +1,11 @@
+# Crate CronJob
+$kubectl create -f cronjob.yaml
+$kubectl get cronjob
+$kubectl get jobs
+
+# Create Jobs
+$kubectl create -f job.yaml
+$kubectl get jobs
+
+# References
+https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/
