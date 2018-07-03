@@ -3,6 +3,12 @@ $minikube addons enable heapster
 $minikube addons open heapster
 $minikube addons list
 
+# Install from Github
+$git clone https://github.com/kubernetes/heapster.git
+$cd heapster
+$kubectl create -f deploy/kube-config/influxdb/
+$kubectl create -f deploy/kube-config/rbac/heapster-rbac.yaml
+
 # Check pods of heapster
 $kubectl get pods --all-namespaces
 $kubectl get service --all-namespaces
