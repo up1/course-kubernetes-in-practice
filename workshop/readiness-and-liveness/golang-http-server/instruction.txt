@@ -1,0 +1,7 @@
+# Create Pods with liveness
+$kubectl create -f https://raw.githubusercontent.com/up1/course-kubernetes-in-practice/master/workshop/readiness-and-liveness/golang-http-server/liveness.yaml
+$kubectl get pods -o wide
+
+# Try to unhealthy Pods
+$kubectl exec demo-liveness-http -- /usr/bin/curl -s localhost/unhealthy
+$kubectl get pods -o wide
