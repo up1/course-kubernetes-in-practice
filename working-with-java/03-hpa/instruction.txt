@@ -40,7 +40,7 @@ $kubectl describe hpa
 Try to create deployment=load-test to run load testing
 $kubectl run -i --tty load-test --image=busybox /bin/sh
 >wget -q -O- http://spring-boot-service.default.svc.cluster.local:8080/user
->while true; sleep 1; do wget -q -O- http://spring-boot-service.default.svc.cluster.local:8080/user; done
+>while true; sleep 5; do wget -q -O- http://spring-boot-service.default.svc.cluster.local:8080/user; done
 
 6. Monitoring system
 $kubectl top nodes
