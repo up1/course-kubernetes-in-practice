@@ -17,6 +17,13 @@ $kubectl get pods --all-namespaces
 $kubectl create -f boot-deployment.yaml
 $kubectl create -f boot-service.yaml
 
+# Play with K8S
+$kubectl create -f https://raw.githubusercontent.com/up1/course-kubernetes-in-practice/master/working-with-java/02-web-app/k8s/mongodb/mongo-controller.yaml
+$kubectl create -f https://raw.githubusercontent.com/up1/course-kubernetes-in-practice/master/working-with-java/02-web-app/k8s/mongodb/mongo-service.yaml
+
+$kubectl create -f https://raw.githubusercontent.com/up1/course-kubernetes-in-practice/master/working-with-java/03-hpa/boot-deployment.yaml
+$kubectl create -f https://raw.githubusercontent.com/up1/course-kubernetes-in-practice/master/working-with-java/03-hpa/boot-service.yaml
+
 4. Create Horizontal Pods Autoscale (HPA)
 $kubectl autoscale deployment/spring-boot-service-deployment --min=1 --max=5 --cpu-percent=5
 $kubectl get hpa
