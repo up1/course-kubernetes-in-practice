@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: demo-liveness-http
+spec:
+  containers:
+  - name: demo-with-go
+    image: somkiat/http-server-go-dev
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 1
+      timeoutSeconds: 1
