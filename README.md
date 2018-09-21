@@ -7,6 +7,13 @@
   * Microservices
   * Containerization
 * Container design principle
+* Basic of Docker
+  * Ecosystem
+  * Docker Image
+  * Docker Container
+  * Docker Registry
+  * Docker Network
+  * Docker Compose
 * Basic of Kubernetes
 * Architecture of Kubernetes
 * Key features
