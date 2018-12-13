@@ -51,10 +51,10 @@ $export SERVICE=192.168.99.100:32614
 $curl  http://$SERVICE
 Hello, "/" on hello-wwsnh
 
-$curl  http://$SERVICE                                                                            MacBook-Pro-2% curl  http://192.168.99.100:32614/
+$curl  http://$SERVICE 
 Hello, "/" on hello-pqnzp
 
-$curl  http://$SERVICE                                                                             MacBook-Pro-2% curl  http://192.168.99.100:32614/
+$curl  http://$SERVICE
 Hello, "/" on hello-lw2p7
 
 9. Goto kubernetes dashboard
