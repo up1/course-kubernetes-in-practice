@@ -1,5 +1,6 @@
 1. Create Deployment ans ReplicaSet
-$kubectl create -f hello_deployment.yml --validate=false
+$kubectl create -f hello_deployment.yml
+$kubectl create -f https://raw.githubusercontent.com/up1/course-kubernetes-in-practice/master/workshop/04-deployment-and-replica-set/hello_deployment.yml
 $kubectl get deployment,rs
 $kubectl describe deployments
 $kubectl describe deployments hello
