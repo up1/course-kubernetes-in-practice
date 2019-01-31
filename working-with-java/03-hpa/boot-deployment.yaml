@@ -19,4 +19,4 @@ spec:
               value: mongo-service
         resources:
             requests:
-              cpu: "200m"
+              cpu: "2m"

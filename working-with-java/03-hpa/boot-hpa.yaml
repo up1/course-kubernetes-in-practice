@@ -14,7 +14,4 @@ spec:
     resource:
       name: cpu
       targetAverageUtilization: 5
-  - type: Resource
-    resource:
-      name: memory
-      targetAverageUtilization: 5
+
