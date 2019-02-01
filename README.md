@@ -33,7 +33,12 @@
   * Ingress Networking
   * StatefulSet
 
+## Workshop
+* [Microservices with Spring Boot](https://github.com/up1/workshop-kubernetes-microservices)
+
 ## Resources
 * https://kubernetes.io
+
+
 
 
