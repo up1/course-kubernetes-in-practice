@@ -1,4 +1,4 @@
-# Kubernetes in Practice
+# Kubernetes in Practices
 
 ## Topics
 * Cloud Native Application
