@@ -1,0 +1,8 @@
+$kubectl create -f pv_01.yaml
+$kubectl create -f pvc_01.yaml
+$kubectl create -f tomcat_pvc_01.yaml
+
+$kubectl get pv
+$kubectl get pvc
+$kubectl get pod
+$kubectl get service

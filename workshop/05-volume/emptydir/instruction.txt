@@ -1,0 +1,5 @@
+$kubectl create -f demo_empty_dir.yaml
+
+$kubectl get pod
+NAME      READY     STATUS    RESTARTS   AGE
+test-pd   1/1       Running   0          38s

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: webserver
+  template:
+    metadata:
+      labels:
+        run: webserver
+    spec:
+      containers:
+        - image: k8s.gcr.io/test-webserver
+          name: test-container
+          volumeMounts:
+          - mountPath: /test-pd
+            name: test-volume
+      volumes:
+      - name: test-volume
+        gcePersistentDisk:
+          pdName: demo-pv
+          fsType: ext4
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webserver
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      nodePort: 30088
+  type: NodePort
+  selector:
+     run: webserver
