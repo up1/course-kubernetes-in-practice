@@ -38,6 +38,7 @@
 
 ## Resources
 * https://kubernetes.io
+* [Docker Cheat Sheet](https://github.com/wsargent/docker-cheat-sheet)
 
 
 
