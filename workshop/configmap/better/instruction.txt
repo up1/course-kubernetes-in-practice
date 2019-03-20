@@ -1,0 +1,22 @@
+Deploy Pod and ConfigMap
+$kubectl create -f .
+$kubectl get po
+NAME               READY     STATUS    RESTARTS   AGE
+configmap-volume   1/1       Running   0          28s
+
+Access to Pod
+$kubectl exec -it configmap-volume sh
+sh#cat /src/app/config/web.properties
+endpoint=somkiat.cc
+port=80
+
+sh#exit
+
+Edit config.yaml and run
+$kubectl create -f config.yaml
+
+Access to Pod again (Not update in realtime, waiting time > 1 minute)
+$kubectl exec -it configmap-volume sh
+sh#cat /src/app/config/web.properties
+endpoint=somkiat.cc
+port=8080

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: better-config
+data:
+  web.properties: |
+    endpoint=somkiat.cc
+    port=8080
