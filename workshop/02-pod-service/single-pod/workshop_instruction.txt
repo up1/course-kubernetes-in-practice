@@ -14,6 +14,9 @@ $minikube ip
 $export SERVICE=<ip of minikube>:<port>
 $curl  http://$SERVICE
 
+// Open forewall in Google Cloud
+$gcloud compute firewall-rules create xxx123 --allow tcp:32346
+
 4. Description of pods and service
 $kubectl describe pod hello-web
 $kubectl describe service hello
