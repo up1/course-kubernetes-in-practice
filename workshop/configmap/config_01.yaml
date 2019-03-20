@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-01
+data:
+  LANGUAGE: Lang 01
+  API_KEY: V 01

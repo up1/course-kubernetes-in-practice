@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: envtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: envtest
+  template:
+    metadata:
+      labels:
+        name: envtest
+    spec:
+      containers:
+      - name: demo
+        image: somkiat/demo_node:1.0
+        ports:
+        - containerPort: 3000
+          hostPort: 80
+        env:
+        - name: LANGUAGE
+          value: "English"
+        - name: API_KEY
+          value: "123-456-789"

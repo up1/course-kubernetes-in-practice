@@ -1,0 +1,91 @@
+Step 1 :: Run with simple way
+
+For Linux/Mac
+$cd code
+$export LANGUAGE=1
+$export API_KEY=2
+$node index.js
+
+For Windows
+$cd code
+$set LANGUAGE=English
+$set API_KEY=123-456-789
+$node index.js
+
+Open url=http://localhost:3000 in your browser
+
+Step 2 :: Run with Docker way
+
+$cd code
+$docker image build -t demo:1.0 .
+$docker container run --rm -p 3000:3000 demo:1.0
+
+Open url=http://localhost:3000 in your browser
+
+If you want to change value of environment variables
+
+$docker container run --rm -p 3000:3000 -e LANGUAGE=Thai demo:1.0
+
+Step 3 :: Run with Kubernetes way by using Environment variable
+
+$kubectl create -f deployment_01.yaml
+$kubectl get pod
+$curl http://<node ip>:80
+
+Step 4 :: Run with Kubernetes way by using ConfigMap and Secret
+
+API_KEY is a secret value
+LANGUAGE is a configuration value
+
+Create secret value with Kuberneter's Secret (BASE64-> Encode not Encrypt !!)
+$kubectl create secret generic apikey --from-literal=API_KEY=123–456-789
+$kubectl get secret
+
+Create config map
+$kubectl create configmap language --from-literal=LANGUAGE=English
+$kubectl get configmap
+
+Deploy Pods
+$kubectl create -f deployment_02.yaml
+$kubectl get po -w
+$kubectl get po -o wide
+$kubectl get node -o wide
+
+$curl http://<node ip>:80
+
+Update configmap and secret
+$kubectl create configmap language --from-literal=LANGUAGE=Thai -o yaml --dry-run | kubectl replace -f -
+kubectl create secret generic apikey --from-literal=API_KEY=098765 -o yaml --dry-run | kubectl replace -f -
+
+BUT Environment environment in Pod not change !!! (Caching data on startup...)
+Try to delete pod !!
+$kubectl delete pod/<pod name>
+
+$kubectl get po -w
+$kubectl get po -o wide
+$kubectl get node -o wide
+$curl http://<node ip>:80
+
+Better solution ?
+
+Delete all resources
+$kubectl delete -f deployment_01.yaml
+$kubectl delete -f deployment_02.yaml
+
+Create configmap resource
+$kubectl create -f config_01.yaml
+$kubectl get configmap
+
+Deploy new Pod
+$kubectl create -f deployment_03.yaml
+$curl http://<node ip>:80
+
+Update configuration ...
+$kubectl create -f config_02.yaml
+
+Edit in file deployment_03.yaml with name: config-02 and save then
+$kubectl apply -f deployment_03.yaml
+$kubectl get po -w
+$kubectl get po -o wide
+$kubectl get node -o wide
+$curl http://<node ip>:80
