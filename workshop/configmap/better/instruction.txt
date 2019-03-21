@@ -13,7 +13,7 @@ port=80
 sh#exit
 
 Edit config.yaml and run
-$kubectl create -f config.yaml
+$kubectl apply -f config.yaml
 
 Access to Pod again (Not update in realtime, waiting time > 1 minute)
 $kubectl exec -it configmap-volume sh
