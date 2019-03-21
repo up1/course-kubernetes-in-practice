@@ -39,6 +39,8 @@
 ## Resources
 * https://kubernetes.io
 * [Docker Cheat Sheet](https://github.com/wsargent/docker-cheat-sheet)
+* [Benchmark results of Kubernetes network plugins (CNI) over 10Gbit/s network](https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-10gbit-s-network-36475925a560)
+
 
 
 
