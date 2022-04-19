@@ -5,4 +5,4 @@ metadata:
 data:
   web.properties: |
     endpoint=somkiat.cc
-    port=8080
+    port=99999
