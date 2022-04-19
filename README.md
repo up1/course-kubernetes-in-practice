@@ -34,6 +34,7 @@
   * StatefulSet
 
 ## Workshop
+* [Hello with Spring Boot](https://github.com/up1/workshop-java-springboot-docker-k8s)
 * [Microservices with Spring Boot](https://github.com/up1/workshop-kubernetes-microservices)
 
 ## Resources
