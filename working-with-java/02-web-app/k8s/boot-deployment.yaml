@@ -1,9 +1,14 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-boot-service-deployment
+  labels:
+    app: spring-boot-service
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-service
   template:
     metadata:
       labels:
