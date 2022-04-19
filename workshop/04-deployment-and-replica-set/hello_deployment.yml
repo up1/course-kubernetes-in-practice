@@ -1,11 +1,11 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello
   labels:
     app: web
 spec:
-  replicas: 3
+  replicas: 1
   revisionHistoryLimit: 1
   selector:
     matchLabels:
