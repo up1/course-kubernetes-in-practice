@@ -36,6 +36,7 @@
 ## Workshop
 * [Hello with Spring Boot](https://github.com/up1/workshop-java-springboot-docker-k8s)
 * [Microservices with Spring Boot](https://github.com/up1/workshop-kubernetes-microservices)
+* [Workshop 2022/04/20](https://github.com/up1/workshop-java-docker-k8s-20220420)
 
 ## Resources
 * https://kubernetes.io
