@@ -35,6 +35,8 @@
 
 ## Install Kubernetes
 * [Install with ansible](https://github.com/up1/workshop-k8s-setup)
+  * Google Clound Compute Engine
+  * Ansible
 
 ## Workshops
 * [Workshop Docker and Kubernetes #1](https://github.com/up1/workshop-docker-k8s-helm)
