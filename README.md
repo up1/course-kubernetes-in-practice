@@ -33,7 +33,14 @@
   * Ingress Networking
   * StatefulSet
 
-## Workshop
+## Install Kubernetes
+* [Install with ansible](https://github.com/up1/workshop-k8s-setup)
+
+## Workshops
+* [Workshop Docker and Kubernetes #1](https://github.com/up1/workshop-docker-k8s-helm)
+  * ReactJS/NodeJS/MongoDB
+* [Workshop Docker and Kubernetes #2](https://github.com/up1/demo-docker-k8s)
+  * ReactJS/NodeJS/PostgreSQL
 * [Hello with Spring Boot](https://github.com/up1/workshop-java-springboot-docker-k8s)
 * [Microservices with Spring Boot](https://github.com/up1/workshop-kubernetes-microservices)
 * [Workshop 2022/04/20](https://github.com/up1/workshop-java-docker-k8s-20220420)
