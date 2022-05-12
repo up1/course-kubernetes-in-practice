@@ -40,6 +40,8 @@
   * Manual or command-line
 
 ## Workshops
+* [Workshop with Docker](https://github.com/up1/workshop-continuous-testing)
+  * ReactJS/Go/PostgreSQL
 * [Workshop Docker and Kubernetes #1](https://github.com/up1/workshop-docker-k8s-helm)
   * ReactJS/NodeJS/MongoDB
 * [Workshop Docker and Kubernetes #2](https://github.com/up1/demo-docker-k8s)
