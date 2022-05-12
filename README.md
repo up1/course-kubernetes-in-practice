@@ -43,9 +43,11 @@
   * ReactJS/NodeJS/MongoDB
 * [Workshop Docker and Kubernetes #2](https://github.com/up1/demo-docker-k8s)
   * ReactJS/NodeJS/PostgreSQL
-* [Hello with Spring Boot](https://github.com/up1/workshop-java-springboot-docker-k8s)
-* [Microservices with Spring Boot](https://github.com/up1/workshop-kubernetes-microservices)
-* [Workshop 2022/04/20](https://github.com/up1/workshop-java-docker-k8s-20220420)
+* [Workshop with Go](https://github.com/up1/workshop-devops-go)
+* Java
+  * [Hello with Spring Boot](https://github.com/up1/workshop-java-springboot-docker-k8s)
+  * [Microservices with Spring Boot](https://github.com/up1/workshop-kubernetes-microservices)
+  * [Workshop 2022/04/20](https://github.com/up1/workshop-java-docker-k8s-20220420)
 
 ## Resources
 * https://kubernetes.io
